@@ -5,7 +5,7 @@
 > Łącznie unikalnych URL: **225**
 
 
-## 🐙 Repozytoria GitHub (69)
+## Repozytoria GitHub (69)
 
 - <https://docs.github.com/actions>  
   _źródło: `Harness kompletności dokumentacji i testy CI`, `Playbook zarządzania cyklem życia rejestru`_
@@ -146,7 +146,7 @@
 - <https://github.com/syntax-tree/unist-util-position>  
   _źródło: `Audyt kompletności dokumentu z użyciem AST`_
 
-## 📚 Dokumentacja (28)
+## Dokumentacja (28)
 
 - <https://apidevtools.com/json-schema-ref-parser/docs/options.html>  
   _źródło: `Harness kompletności dokumentacji i testy CI`_
@@ -205,7 +205,7 @@
 - <https://vale.sh/docs/vale-ini>  
   _źródło: `Harness kompletności dokumentacji i testy CI`_
 
-## 🔗 Inne zasoby (128)
+## Inne zasoby (128)
 
 - <https://ajv.js.org/json-schema.html>  
   _źródło: `Audyt kompletności dokumentu z użyciem AST`, `Harness kompletności dokumentacji i testy CI`, `JSON-Schema diff z natychmiastowym blokiem CI` +1_
@@ -368,7 +368,7 @@
 - <https://osmfoundation.org/wiki/Licence/Attribution_Guidelines>  
   _źródło: `Minimalny ślad licencyjny dla asetów GBA`_
 
-## 📁 Katalogi źródłowe
+## Katalogi źródłowe
 
 Obszar `schema` zawiera **7** katalogów:
 
