@@ -1,101 +1,102 @@
 # ishkarim-schema
 
-> Schematy i walidacja: JSON-Schema, LinkML, SHACL, Spectral, audyt kompletności.
+> **Schematy i walidacja — JSON-Schema, LinkML, SHACL, Spectral jako bramki CI**
 
-## Instalacja
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)]()
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue)]()
+[![License](https://img.shields.io/badge/license-MIT-green)]()
+[![CPU-only](https://img.shields.io/badge/CPU-only-orange)]()
+
+## Problem, który rozwiązujemy
+
+- Automatyczna walidacja dokumentów przed ingestem do bazy wiedzy
+- Bramki CI które odrzucają niekompletne dane (schema-as-policy)
+- Indukcja schematu z przykładów (AutoSchemaKG) — schemat bez ręcznego pisania
+
+Pełna lista → [docs/PROBLEMS.md](docs/PROBLEMS.md)
+
+## Szybki start
 
 ```bash
+# Instalacja
 pip install -e projects/ishkarim-schema
+
+# Demo (10 sekund)
+python projects/ishkarim-schema/demo.py
 ```
 
-Lub lokalnie z tego repozytorium:
-
-```bash
-cd projects/ishkarim-schema
-pip install -e ".[dev]"
-```
-
-## Użycie
+## Użycie w kodzie
 
 ```python
 import ishkarim_schema as m
 
-# Lista dostępnych modułów
-print(m.MODULES)
-
-# Wczytaj indeks wiedzy
+# Wszystkie 7 katalogi wiedzy obszaru 'schema'
 docs = m.load_knowledge_index()
+print(f"{len(docs)} katalogów | obszar: {m.__area__}")
+
+# Narzędzia pomocnicze
+from ishkarim_schema.utils import read_work_md, extract_tags, extract_python_blocks
 ```
 
-## Obszar tematyczny
+## Dla kogo
 
-Ten projekt agreguje wiedzę z **7 katalogów** obszaru `schema`:
+- Data pipeline z gwarancją jakości wejścia (garbage-in prevention)
+- API gateway który waliduje żądania przed przetwarzaniem
+- Knowledge base governance — każdy dokument musi przejść schema check w CI
 
-- `Audyt kompletności dokumentu z użyciem AST`
-- `DocSchema`
-- `Harness kompletności dokumentacji i testy CI`
-- `JSON-Schema diff z natychmiastowym blokiem CI`
-- `Minimalny ślad licencyjny dla asetów GBA`
-- `Playbook zarządzania cyklem życia rejestru`
-- `Pułapki kotwic i aliasów YAML przy haszowaniu`
+## Dokumentacja
 
-## Przykładowe źródła
+| Plik | Zawartość |
+|------|-----------|
+| [docs/PROBLEMS.md](docs/PROBLEMS.md) | Co rozwiązuje / czego nie / znane problemy |
+| [docs/api.md](docs/api.md) | Dokumentacja API |
+| [docs/overview.md](docs/overview.md) | Przegląd obszaru |
+| [docs/sources.md](docs/sources.md) | Źródłowe katalogi wiedzy |
+| [MODULES.md](MODULES.md) | Pełny indeks 7 katalogów |
 
-### Audyt kompletności dokumentu z użyciem AST
+## Testy i benchmarki
 
-# WORK: Audyt kompletności dokumentu z użyciem AST
-## 0-Metadane
-- Katalog: Audyt kompletności dokumentu z użyciem AST
-- Pliki: 16 (bez placeholderów)
-- Tagi: AST, audyt-dokumentów, kompletność, Pandoc, mdast, remark, JSON-Schema, CI, SQLite, SARIF, bramki-jakości, docs-as-code, Python-CLI, linting
+```bash
+# Testy jednostkowe
+pytest tests/test_schema.py -v
 
-### DocSchema
+# Testy domenowe (z prawdziwymi danymi)
+pytest tests/test_schema_domain.py -v
 
-# DocSchema
-## 0-Metadane
-- Pliki: 9 (PROJ-DOCSCHEMA.md, PROJECT.md, README.md, SDRS-ADE-PLAN.md, SELF-DEVELOPMENT.md, WORK.md, INDEX.md, pyproject.toml, docschema_cli.py + podkatalogi src/, docs/, model/, sections/, templates/, tests/)
-- Tagi: docs-as-code, schema, validation, governance, generation, traceability, metamodel, CLI, Python
-- Status: done
-
-### Harness kompletności dokumentacji i testy CI
-
-# WORK: Harness kompletności dokumentacji i testy CI
-## 0-Metadane
-- Katalog: Harness kompletności dokumentacji i testy CI
-- Pliki: 19 (bez placeholderów)
-- Tagi: ci, documentation-quality, openapi, json-schema, spectral, oasdiff, sarif, vale, linting, breaking-changes, determinism, github-actions
-
+# Benchmarki wydajnościowe
+python benchmarks/bench_schema.py --quick
+```
 
 ## Struktura projektu
 
 ```
 ishkarim-schema/
-├── pyproject.toml        # installable package
+├── demo.py                    ← uruchom mnie
+├── pyproject.toml
 ├── README.md
-├── MODULES.md            # pełny indeks 7 katalogów-źródeł
-├── src/
-│   └── ishkarim_schema/
-│       ├── __init__.py   # publiczne API
-│       ├── utils.py      # wspólne narzędzia
-│       └── *.py          # kod wyekstrahowany z WORK.md
+├── MODULES.md                 ← 7 katalogów-źródeł
+├── docs/
+│   ├── PROBLEMS.md            ← co rozwiązuje / czego nie
+│   ├── api.md                 ← dokumentacja API
+│   ├── overview.md
+│   └── sources.md
+├── src/ishkarim_schema/
+│   ├── __init__.py            ← MODULES list + load_knowledge_index()
+│   ├── utils.py               ← read_work_md, extract_tags, extract_python_blocks
+│   └── snippets/              ← kod z WORK.md (referencyjny)
 ├── tests/
-│   ├── __init__.py
-│   └── test_schema.py
-└── docs/
-    ├── overview.md
-    └── sources.md
+│   ├── test_schema.py         ← testy jednostkowe
+│   └── test_schema_domain.py  ← testy domenowe
+└── benchmarks/
+    └── bench_schema.py        ← benchmarki wydajnościowe
 ```
 
-## Testy
+## Ograniczenia
 
-```bash
-pytest projects/ishkarim-schema/tests/ -v
-```
-
-## Źródło danych
-
-Katalogi źródłowe znajdują się w katalogu głównym repozytorium Ishkarim.
-Każdy katalog zawiera `WORK.md` (notatki badawcze) i `TAGS.md` (metadane).
+> ⚠️ To projekt **referencyjny** — wzorce i wiedza, nie gotowa biblioteka produkcyjna.
+> Przed wdrożeniem produkcyjnym przeczytaj [docs/PROBLEMS.md](docs/PROBLEMS.md).
 
 ---
-*Wygenerowano automatycznie przez `scripts/build_projects.py`*
+
+*Część ekosystemu [Ishkarim](../../README.md) — 7 katalogów wiedzy obszaru `schema`*
+*Wygenerowano: 2026-03-11 | `scripts/build_projects.py` + `scripts/enrich_projects.py`*
