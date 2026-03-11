@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/ishkarim_schema/__init__.py
+src/ishkarim_schema/extracted.py
+src/ishkarim_schema/utils.py
+src/ishkarim_schema.egg-info/PKG-INFO
+src/ishkarim_schema.egg-info/SOURCES.txt
+src/ishkarim_schema.egg-info/dependency_links.txt
+src/ishkarim_schema.egg-info/requires.txt
+src/ishkarim_schema.egg-info/top_level.txt
+src/ishkarim_schema/snippets/__init__.py
+src/ishkarim_schema/snippets/extracted.py
+tests/test_schema.py
